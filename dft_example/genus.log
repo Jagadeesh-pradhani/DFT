@@ -1,0 +1,391 @@
+Cadence Genus(TM) Synthesis Solution.
+Copyright 2022 Cadence Design Systems, Inc. All rights reserved worldwide.
+Cadence and the Cadence logo are registered trademarks and Genus is a trademark
+of Cadence Design Systems, Inc. in the United States and other countries.
+
+[11:17:36.239513] Configured Lic search path (21.01-s002): 5280@10.3.0.68
+
+Version: 21.14-s082_1, built Thu Jun 23 02:02:08 PDT 2022
+Options: 
+Date:    Thu Feb 13 11:17:36 2025
+Host:    CICS4.kletech.ac.in (x86_64 w/Linux 4.18.0-425.3.1.el8.x86_64) (16cores*24cpus*1physical cpu*13th Gen Intel(R) Core(TM) i7-13700 30720KB) (15881900KB)
+PID:     240465
+OS:      Red Hat Enterprise Linux release 8.7 (Ootpa)
+
+
+[11:17:36.430856] Periodic Lic check successful
+[11:17:36.430859] Feature usage summary:
+[11:17:36.430864] Genus_Synthesis
+Checking out license: Genus_Synthesis
+
+
+***********************************************************************************************************
+***********************************************************************************************************
+
+
+
+Loading tool scripts...
+Finished loading tool scripts (5 seconds elapsed).
+
+WARNING: This version of the tool is 965 days old.
+@genus:root: 1> read_libs /cad_area/install/FOUNDRY/digital/90nm/dig/lib/slow.lib
+
+Threads Configured:3
+
+  Message Summary for Library slow.lib:
+  *************************************
+  Missing a function attribute in the output pin definition. [LBR-518]: 1
+  Missing library level attribute. [LBR-516]: 1
+  *************************************
+ 
+Info    : Created nominal operating condition. [LBR-412]
+        : Operating condition '_nominal_' was created for the PVT values (1.000000, 0.900000, 125.000000) in library 'slow.lib'.
+        : The nominal operating condition is represented, either by the nominal PVT values specified in the library source (via nom_process,nom_voltage and nom_temperature respectively), or by the default PVT values (1.0,1.0,1.0).
+@genus:root: 2> read_physical -lef /cad_area/install/FOUNDRY/digital/90nm/dig/lef/gsclib090_translated.lef
+
+  According to lef_library, there are total 9 routing layers [ V(4) / H(5) ]
+
+  Library has 324 usable logic and 128 usable sequential lib-cells.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL1 cannot be found in library.
+        : Ensure that the proper library files are available and have been imported.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL2 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL64 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL8 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL16 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell ANTENNA cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL4 cannot be found in library.
+Warning : Physical cell not defined in library. [PHYS-279]
+        : The physical (LEF) cell FILL32 cannot be found in library.
+@genus:root: 3> clear
+@genus:root: 4> elaborate dft_example
+Error   : Could not find an HDL design. [CDFG-210] [elaborate]
+        : The design is 'dft_example'.
+        : This error may happen if you read a set of files, and you try to elaborate a design which description is not part of the files read. To fix this, check the name of the design you want to elaborate, or check if you have read all the expected RTL files.
+UM:   flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:*                                                                   elaborate
+1
+@genus:root: 5> read_hdl RTL/dft_example.v
+@genus:root: 6> elaborate dft_example
+Info    : Elaborating Design. [ELAB-1]
+        : Elaborating top-level block 'dft_example' from file 'RTL/dft_example.v'.
+Info    : Done Elaborating Design. [ELAB-3]
+        : Done elaborating 'dft_example'.
+Checking for analog nets...
+Check completed for analog nets.
+Checking for source RTL...
+Check completed for source RTL.
+Running Unified Mux Engine Tricks...
+Completed Unified Mux Engine Tricks
+
+Stage: post_elab
+--------------------------------------------------------
+| Trick             | Accepts | Rejects | Runtime (ms) | 
+--------------------------------------------------------
+| ume_constant_bmux |       0 |       0 |         0.00 | 
+--------------------------------------------------------
+Starting clip mux common data inputs [v1.0] (stage: post_elab, startdef: dft_example, recur: true)
+Completed clip mux common data inputs (accepts: 0, rejects: 0, runtime: 0.000s)
+Starting clip the non-user hierarchies [v2.0] (stage: post_elab, startdef: dft_example, recur: true)
+Completed clip the non-user hierarchies (accepts: 0, rejects: 0, runtime: 0.000s)
+
+Stage: post_elab
+---------------------------------------------------------
+| Transform          | Accepts | Rejects | Runtime (ms) | 
+---------------------------------------------------------
+| hlo_clip_mux_input |       0 |       0 |         0.00 | 
+| hlo_clip           |       0 |       0 |         0.00 | 
+---------------------------------------------------------
+      flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:*                                                                   elaborate
+design:dft_example
+@genus:root: 7> write_hdl > elaborate.v
+@genus:root: 8> write_hdl > outputs/elaborate.v
+@genus:root: 9> time_info Elaboration
+stamp 'Elaboration' being created for table 'default'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:00:02(00:00:00) |  00:00:00(00:00:00) |   0.0(  0.0) |   11:17:39 (Feb13) |  221.7 MB | init
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:00:05(00:01:30) |  00:00:03(00:01:30) | 100.0(100.0) |   11:19:09 (Feb13) |  431.1 MB | Elaboration
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: default, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+@genus:root: 10> check_design -unresolved
+
+
+ 	 Check Design Report (c)
+	 ------------------- 
+
+  Unresolved References & Empty Modules
+  ------------------------------------- 
+No unresolved references in design 'dft_example'
+
+No empty modules in design 'dft_example'
+
+  Done Checking the design.
+@genus:root: 11> get_ports
+0x1
+clk rst_n scan_en scan_in a[1] a[0] b[1] b[0] scan_out y[1] y[0] 
+@genus:root: 12> read_sdc RTL/constraints.sdc
+Error   : A command argument did not match any of the acceptable command options. [TUI-64] [create_clock]
+        : The argument in question is '#'.
+        : Check the command usage and correct the input to the command.
+Error   : Could not interpret SDC command. [SDC-202] [read_sdc]
+        : The 'read_sdc' command encountered an error while processing this command on line '2' of the SDC file 'RTL/constraints.sdc': create_clock -name clk -period 10 [get_ports clk]  # 10ns clock period (100 MHz).
+        : The 'read_sdc' command encountered a problem while trying to evaluate an SDC command. This SDC command will be added to the Tcl variable $::dc::sdc_failed_commands.
+Warning : Could not find requested search value. [SDC-208] [get_clocks]
+        : The 'get_clocks' command on line '3' of the SDC file 'RTL/constraints.sdc'  cannot find any clocks named 'clk'
+        : Use get_* commands to find the objects along with a wild card entry in the name of the object to check if the object is existing with different naming style.
+Error   : A required object parameter could not be found. [TUI-61] [parse_options]
+        : An object of type 'clock' named '' could not be found.
+        : Check to make sure that the object exists and is of the correct type.  The 'what_is' command can be used to determine the type of an object.
+Error   : Could not interpret SDC command. [SDC-202] [read_sdc]
+        : The 'read_sdc' command encountered an error while processing this command on line '3' of the SDC file 'RTL/constraints.sdc': set_clock_transition -rise 0.1 [get_clocks clk]    # Rise transition time.
+Warning : Could not find requested search value. [SDC-208] [get_clocks]
+        : The 'get_clocks' command on line '4' of the SDC file 'RTL/constraints.sdc'  cannot find any clocks named 'clk'
+Error   : A required object parameter could not be found. [TUI-61] [parse_options]
+        : An object of type 'clock' named '' could not be found.
+Error   : Could not interpret SDC command. [SDC-202] [read_sdc]
+        : The 'read_sdc' command encountered an error while processing this command on line '4' of the SDC file 'RTL/constraints.sdc': set_clock_transition -fall 0.1 [get_clocks clk]    # Fall transition time.
+Warning : Could not find requested search value. [SDC-208] [get_clocks]
+        : The 'get_clocks' command on line '5' of the SDC file 'RTL/constraints.sdc'  cannot find any clocks named 'clk'
+Error   : A command argument did not match any of the acceptable command options. [TUI-64] [set_clock_uncertainty_fast]
+        : The argument in question is '#'.
+Error   : Option missing for SDC command. [SDC-203] [set_clock_uncertainty]
+        : The set_clock_uncertainty command requires '-from', '-to', '-rise_from', '-fall_from', '-rise_to', '-fall_to', or list of objects option.
+        : This SDC command requires the indicated options.  Check the SDC command and contact Cadence customer support if you believe this option combination should be supported.
+Error   : Could not interpret SDC command. [SDC-202] [read_sdc]
+        : The 'read_sdc' command encountered an error while processing this command on line '5' of the SDC file 'RTL/constraints.sdc': set_clock_uncertainty -setup 0.2 [get_clocks clk]  # Clock uncertainty for setup.
+Warning : Could not find requested search value. [SDC-208] [get_clocks]
+        : The 'get_clocks' command on line '6' of the SDC file 'RTL/constraints.sdc'  cannot find any clocks named 'clk'
+Error   : A command argument did not match any of the acceptable command options. [TUI-64] [set_clock_uncertainty_fast]
+        : The argument in question is '#'.
+Error   : Could not interpret SDC command. [SDC-202] [read_sdc]
+        : The 'read_sdc' command encountered an error while processing this command on line '6' of the SDC file 'RTL/constraints.sdc': set_clock_uncertainty -hold 0.1 [get_clocks clk]   # Clock uncertainty for hold.
+Error   : A command argument did not match any of the acceptable command options. [TUI-64] [set_input_output_delay_fast]
+        : The argument in question is '#'.
+Error   : Could not interpret SDC command. [SDC-202] [read_sdc]
+        : The 'read_sdc' command encountered an error while processing this command on line '9' of the SDC file 'RTL/constraints.sdc': set_input_delay -clock clk -max 1 [get_ports rst_n]  # Reset input delay.
+Error   : A command argument did not match any of the acceptable command options. [TUI-64] [set_input_output_delay_fast]
+        : The argument in question is '#'.
+Error   : Could not interpret SDC command. [SDC-202] [read_sdc]
+        : The 'read_sdc' command encountered an error while processing this command on line '12' of the SDC file 'RTL/constraints.sdc': set_input_delay -clock clk -max 2 [get_ports a]      # Input delay for 'a'.
+Error   : A command argument did not match any of the acceptable command options. [TUI-64] [set_input_output_delay_fast]
+        : The argument in question is '#'.
+Error   : Could not interpret SDC command. [SDC-202] [read_sdc]
+        : The 'read_sdc' command encountered an error while processing this command on line '13' of the SDC file 'RTL/constraints.sdc': set_input_delay -clock clk -max 2 [get_ports b]      # Input delay for 'b'.
+Error   : A command argument did not match any of the acceptable command options. [TUI-64] [set_input_output_delay_fast]
+        : The argument in question is '#'.
+Error   : Could not interpret SDC command. [SDC-202] [read_sdc]
+        : The 'read_sdc' command encountered an error while processing this command on line '16' of the SDC file 'RTL/constraints.sdc': set_output_delay -clock clk -max 2 [get_ports y]     # Output delay for 'y'.
+Error   : A command argument did not match any of the acceptable command options. [TUI-64] [set_input_output_delay_fast]
+        : The argument in question is '#'.
+Error   : Could not interpret SDC command. [SDC-202] [read_sdc]
+        : The 'read_sdc' command encountered an error while processing this command on line '19' of the SDC file 'RTL/constraints.sdc': set_input_delay -clock clk -max 1 [get_ports scan_en]  # Scan enable input delay.
+Error   : A command argument did not match any of the acceptable command options. [TUI-64] [set_input_output_delay_fast]
+        : The argument in question is '#'.
+Error   : Could not interpret SDC command. [SDC-202] [read_sdc]
+        : The 'read_sdc' command encountered an error while processing this command on line '20' of the SDC file 'RTL/constraints.sdc': set_input_delay -clock clk -max 1 [get_ports scan_in]  # Scan input delay.
+Error   : A command argument did not match any of the acceptable command options. [TUI-64] [set_input_output_delay_fast]
+        : The argument in question is '#'.
+Error   : Could not interpret SDC command. [SDC-202] [read_sdc]
+        : The 'read_sdc' command encountered an error while processing this command on line '21' of the SDC file 'RTL/constraints.sdc': set_output_delay -clock clk -max 1 [get_ports scan_out]  # Scan output delay.
+Statistics for commands executed by read_sdc:
+ "create_clock"             - successful      0 , failed      1 (runtime  0.00)
+ "get_clocks"               - successful      0 , failed      4 (runtime  0.00)
+ "get_ports"                - successful      8 , failed      0 (runtime  0.00)
+ "set_clock_transition"     - successful      0 , failed      2 (runtime  0.00)
+ "set_clock_uncertainty"    - successful      0 , failed      2 (runtime  0.00)
+ "set_input_delay"          - successful      0 , failed      5 (runtime  0.00)
+ "set_output_delay"         - successful      0 , failed      2 (runtime  0.00)
+Warning : Total failed commands during read_sdc are 16
+Warning : One or more commands failed when these constraints were applied. [SDC-209]
+        : The 'read_sdc' command encountered a problem while processing commands.
+        : You can examine the failed commands or save them to a file by querying the Tcl variable $::dc::sdc_failed_commands.
+read_sdc completed in 00:00:00 (hh:mm:ss)
+@genus:root: 13> clear
+@genus:root: 14> read_sdc RTL/constraints.sdc
+Statistics for commands executed by read_sdc:
+ "create_clock"             - successful      1 , failed      0 (runtime  0.00)
+ "get_clocks"               - successful      4 , failed      0 (runtime  0.00)
+ "get_ports"                - successful      8 , failed      0 (runtime  0.00)
+ "set_clock_transition"     - successful      2 , failed      0 (runtime  0.00)
+ "set_clock_uncertainty"    - successful      2 , failed      0 (runtime  0.00)
+ "set_input_delay"          - successful      5 , failed      0 (runtime  0.00)
+ "set_output_delay"         - successful      2 , failed      0 (runtime  0.00)
+read_sdc completed in 00:00:00 (hh:mm:ss)
+@genus:root: 15> check_timing_intent
+============================================================
+  Generated by:           Genus(TM) Synthesis Solution 21.14-s082_1
+  Generated on:           Feb 13 2025  11:24:29 am
+  Module:                 dft_example
+  Technology libraries:   slow 
+                          physical_cells 
+  Operating conditions:   slow 
+  Interconnect mode:      global
+  Area mode:              physical library
+============================================================
+
+-------------------------------------------------------------------------------
+Inputs without external driver/transition
+
+The following primary inputs have no external driver or input transition set.   
+As a result the transition on the ports will be assumed as zero. The            
+'external_driver' attribute is used to add and external driver or the           
+'fixed_slew' attribute to add an external transition.                           
+
+port:dft_example/a[0]
+port:dft_example/a[1]
+port:dft_example/b[0]
+  ... 4 other warnings in this category.
+ Use the -verbose option for more details.
+-------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------
+Outputs without external load
+
+The following primary outputs have no external load set. As a result the load   
+on the ports will be assumed as zero. The 'external_pin_cap' attribute is used  
+to add and external pin cap.                                                    
+
+port:dft_example/scan_out
+port:dft_example/y[0]
+port:dft_example/y[1]
+-------------------------------------------------------------------------------
+
+
+Lint summary
+ Unconnected/logic driven clocks                                  0
+ Sequential data pins driven by a clock signal                    0
+ Sequential clock pins without clock waveform                     0
+ Sequential clock pins with multiple clock waveforms              0
+ Generated clocks without clock waveform                          0
+ Generated clocks with incompatible options                       0
+ Generated clocks with multi-master clock                         0
+ Paths constrained with different clocks                          0
+ Loop-breaking cells for combinational feedback                   0
+ Nets with multiple drivers                                       0
+ Timing exceptions with no effect                                 0
+ Suspicious multi_cycle exceptions                                0
+ Pins/ports with conflicting case constants                       0
+ Inputs without clocked external delays                           0
+ Outputs without clocked external delays                          0
+ Inputs without external driver/transition                        7
+ Outputs without external load                                    3
+ Exceptions with invalid timing start-/endpoints                  0
+
+                                                  Total:         10
+
+@genus:root: 16> if {[llength [all_registers]] > 0} { 
+  define_cost_group -name I2C -design dft_example
+  define_cost_group -name C2O -design dft_example
+  define_cost_group -name C2C -design dft_example
+  path_group -from [all_registers] -to [all_registers] -group C2C -name C2C
+  path_group -from [all_registers] -to [all_outputs] -group C2O -name C2O
+  path_group -from [all_inputs]  -to [all_registers] -group I2C -name I2C
+}
+exception:dft_example/I2C
+@genus:root: 17> define_cost_group -name I2O -design dft_example
+cost_group:dft_example/I2O
+@genus:root: 18> path_group -from [all_inputs]  -to [all_outputs] -group I2O -name I2O
+exception:dft_example/I2O
+@genus:root: 19> foreach cg [vfind / -cost_group *] {
+  report_timing -group [list $cg] >> reports/dft_example_pretim.rpt
+}
+@genus:root: 20> gui_show
+@genus:root: 21> set_db / .dft_scan_style muxed_scan
+  Setting attribute of root '/': 'dft_scan_style' = muxed_scan
+1 muxed_scan
+@genus:root: 22> set_db / .dft_prefix DFT_
+  Setting attribute of root '/': 'dft_prefix' = DFT_
+1 DFT_
+@genus:root: 23> set_db / .dft_identify_top_level_test_clocks true
+  Setting attribute of root '/': 'dft_identify_top_level_test_clocks' = true
+1 true
+@genus:root: 24> set_db / .dft_identify_test_signals true
+  Setting attribute of root '/': 'dft_identify_test_signals' = true
+1 true
+@genus:root: 25> set_db / .dft_identify_internal_test_clocks false
+  Setting attribute of root '/': 'dft_identify_internal_test_clocks' = false
+1 false
+@genus:root: 26> set_db / .use_scan_seqs_for_non_dft false
+  Setting attribute of root '/': 'use_scan_seqs_for_non_dft' = false
+1 false
+@genus:root: 27> gui_show
+@genus:root: 28> clear
+@genus:root: 29> set_db "design:dft_example" .dft_scan_map_mode tdrc_pass
+  Setting attribute of design 'dft_example': 'dft_scan_map_mode' = tdrc_pass
+1 tdrc_pass
+@genus:root: 30> gui_show
+@genus:root: 31> gui_show
+@genus:root: 32> set_db "design:dft_example" .dft_connect_shift_enable_during_mapping tie_off
+  Setting attribute of design 'dft_example': 'dft_connect_shift_enable_during_mapping' = tie_off
+1 tie_off
+@genus:root: 33> set_db "design:dft_example" .dft_connect_shift_enable_during_mapping tie_off
+  Setting attribute of design 'dft_example': 'dft_connect_shift_enable_during_mapping' = tie_off
+1 tie_off
+@genus:root: 34> set_db "design:dft_example" .dft_connect_scan_data_pins_during_mapping loopback
+  Setting attribute of design 'dft_example': 'dft_connect_scan_data_pins_during_mapping' = loopback
+1 loopback
+@genus:root: 35> set_db "design:dft_example" .dft_scan_output_preference auto
+  Setting attribute of design 'dft_example': 'dft_scan_output_preference' = auto
+1 auto
+@genus:root: 36> set_db "design:dft_example" .dft_lockup_element_type preferred_level_sensitive
+  Setting attribute of design 'dft_example': 'dft_lockup_element_type' = preferred_level_sensitive
+1 preferred_level_sensitive
+@genus:root: 37> set_db "design:dft_example" .dft_lockup_element_type preferred_level_sensitive
+  Setting attribute of design 'dft_example': 'dft_lockup_element_type' = preferred_level_sensitive
+1 preferred_level_sensitive
+@genus:root: 38> set_db "design:dft_example" .dft_mix_clock_edges_in_scan_chains true
+  Setting attribute of design 'dft_example': 'dft_mix_clock_edges_in_scan_chains' = true
+1 true
+@genus:root: 39> gui_show
+@genus:root: 40> get_ports
+0x35
+clk rst_n scan_en scan_in a[1] a[0] b[1] b[0] scan_out y[1] y[0] 
+@genus:root: 41> get_ports
+0x36
+clk rst_n scan_en scan_in a[1] a[0] b[1] b[0] scan_out y[1] y[0] 
+@genus:root: 42> gui_show
+@genus:root: 43> define_test_clock -name scanclk -period 18000 clk
+test_clock:dft_example/scanclk/scanclk
+@genus:root: 44> get_ports
+0x37
+clk rst_n scan_en scan_in a[1] a[0] b[1] b[0] scan_out y[1] y[0] 
+@genus:root: 45> define_shift_enable -name se -active high scan_en
+test_signal:dft_example/se
+@genus:root: 46> define_scan_chain -name top_chain -sdi scan_in -sdo scan_out -shift_enable se -create_ports
+Warning : Required option missing. [DFT-930]
+        : Scan data in 'scan_in' is already connected; in this case option -shared_input is required.
+        : One or more specified options additionally require an option that is not specified.  Add the missing option and rerun the command.
+Error   : Could not create scan chain. [DFT-150] [define_scan_chain]
+        : Scan data out 'scan_out' is already connected; in this case either option -shared_output or -non_shared_output is required.
+        : Refer to the 'Command Reference' for more information about the options of the 'define_scan_chain' command. Then rerun the command after specifying the options correctly.
+Warning : Ignored option. [DFT-127]
+        : Specified '-sdi scan_in' and '-sdo scan_out' matched existing ports/pins; ignoring option '-create_ports'.
+        : A given option can be safely ignored.
+1
+@genus:root: 47> get_ports
+0x38
+clk rst_n scan_en scan_in a[1] a[0] b[1] b[0] scan_out y[1] y[0] 
+@genus:root: 48> create_test_protocol
+invalid command name "create_test_protocol"
+@genus:root: 49> clear
+@genus:root: 50> clear
+@genus:root: 51> exit
+
+Lic Summary:
+[11:39:05.279570] Cdslmd servers: cadence
+[11:39:05.279579] Feature usage summary:
+[11:39:05.279579] Genus_Synthesis
+
+Normal exit.
