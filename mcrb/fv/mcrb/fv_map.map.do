@@ -18,11 +18,11 @@ add mapped point skew_addr_cntr_o[0] skew_addr_cntr_o[0] -type PO PO
 
 
 //Sequential Pins
-add mapped point skew_addr_cntr[1]/q skew_addr_cntr_reg[1]/Q -type DFF DFF
-add mapped point skew_addr_cntr[0]/q skew_addr_cntr_reg[0]/Q -type DFF DFF
-add mapped point skew_addr_cntr[3]/q skew_addr_cntr_reg[3]/Q -type DFF DFF
 add mapped point skew_addr_cntr[4]/q skew_addr_cntr_reg[4]/Q -type DFF DFF
+add mapped point skew_addr_cntr[3]/q skew_addr_cntr_reg[3]/Q -type DFF DFF
+add mapped point skew_addr_cntr[1]/q skew_addr_cntr_reg[1]/Q -type DFF DFF
 add mapped point skew_addr_cntr[2]/q skew_addr_cntr_reg[2]/Q -type DFF DFF
+add mapped point skew_addr_cntr[0]/q skew_addr_cntr_reg[0]/Q -type DFF DFF
 add mapped point mc_rb_fuse_vld_q/q mc_rb_fuse_vld_q_reg/Q -type DFF DFF
 
 
