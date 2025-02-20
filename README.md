@@ -122,4 +122,4 @@ source run.tcl
 
 # Support
 For issues contact: [Jagadeesh Pradhani] jagadeesh.d.pradhani@gmail.com <br>
-Last updated: {{LAST_UPDATED_DATE}}
+Last updated: 20/02/2025
