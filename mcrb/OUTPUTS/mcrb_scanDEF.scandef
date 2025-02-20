@@ -1,0 +1,23 @@
+VERSION 5.5 ;
+NAMESCASESENSITIVE ON ;
+DIVIDERCHAR "/" ;
+BUSBITCHARS "[]" ;
+DESIGN mcrb ;
+
+SCANCHAINS 1 ;
+  - top_chain_seg1_mc_rb_ef1_sclk_i_rising 
+    + PARTITION p_mc_rb_ef1_sclk_i_rising 
+      MAXBITS 6
+    + START PIN scan_in
+    + FLOATING 
+       mc_rb_fuse_vld_q_reg ( IN SI ) ( OUT Q ) 
+       skew_addr_cntr_reg[0] ( IN SI ) ( OUT Q ) 
+       skew_addr_cntr_reg[1] ( IN SI ) ( OUT Q ) 
+       skew_addr_cntr_reg[2] ( IN SI ) ( OUT Q ) 
+       skew_addr_cntr_reg[3] ( IN SI ) ( OUT Q ) 
+       skew_addr_cntr_reg[4] ( IN SI ) ( OUT Q ) 
+    + STOP PIN scan_out
+;
+
+END SCANCHAINS 
+END DESIGN 
